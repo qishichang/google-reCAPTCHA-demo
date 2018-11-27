@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using MyReCAPTCHA.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MyReCAPTCHA.Services;
 
 namespace MyReCAPTCHA
 {
@@ -39,6 +40,8 @@ namespace MyReCAPTCHA
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddTransient<IRecaptchaService, RecaptchaService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
